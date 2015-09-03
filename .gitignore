@@ -1,0 +1,14 @@
+.project
+.classpath
+.profile
+.settings
+.svn
+target
+build
+bin
+
+*.iml
+.idea/
+
+
+
