@@ -13,9 +13,6 @@
 			<role-name>administrador</role-name>
 		</auth-constraint>
 	</security-constraint>
-	<login-config>
-		<auth-method>JAAS</auth-method>
-	</login-config>
 	<security-role>
 		<role-name>administrador</role-name>
 	</security-role>
