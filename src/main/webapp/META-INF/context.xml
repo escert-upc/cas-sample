@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context privileged="true">
+  <!--
+    The following configuration uses the CAS 2.0 protocol and a static
+    properties file to define allowed users to the Tomcat manager application.
+    The content of manager-users.properties contains entries like the following:
+
+      admin=manager-gui,manager-script,manager-jmx,manager-status
+      operator=manager-status
+      deployer=manager-script
+
+    Where admin, operator, and deployer are valid logins for the CAS server.
+    The path to the properties file is relative to $CATALINA_HOME.
+
+    This example also configures the container for CAS single sign-out.
+  -->
+  <Realm
+    className="org.jasig.cas.client.tomcat.v6.PropertiesCasRealm"
+    propertiesFilePath="conf/manager-user-roles.properties"
+    />
+  <Valve
+    className="org.jasig.cas.client.tomcat.v6.Cas20CasAuthenticator"
+    encoding="UTF-8"
+    casServerLoginUrl="https://server.example.com/cas/login"
+    casServerUrlPrefix="https://server.example.com/cas/"
+    serverName="client.example.com"
+    />
+
+  <!-- Single sign-out support -->
+  <Valve
+    className="org.jasig.cas.client.tomcat.v6.SingleSignOutValve"
+    artifactParameterName="SAMLart"
+    />
+
+  <!--
+    Uncomment one of these valves to provide a logout URI for the
+    manager servlet.
+  -->
+  <!--
+  <Valve
+    className="org.jasig.cas.client.tomcat.v6.RegexUriLogoutValve"
+    logoutUriRegex="/manager/logout.*"
+    />
+  <Valve
+    className="org.jasig.cas.client.tomcat.v6.StaticUriLogoutValve"
+    logoutUri="/manager/logout.html"
+    />
+  -->
+</Context>
